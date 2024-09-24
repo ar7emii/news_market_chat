@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+<title>Chats</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="display-4">Чаты</h1>
+      <div class="list-group">
+        {% for chat in user_chats %}
+
+            {% for user in chat.users.all %}
+              {% if user != request.user %}
+                <a href="{% url 'open_chat' user_id=user.id %}" class="list-group-item list-group-item-action">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="text-decoration-none truncate">{{ user }}</span>
+                  {% for key, unseen_message_count in chat_unseen_message_count.items %}
+                    {% if chat.pk == key %}
+                      {% if unseen_message_count > 0 %}
+                        <span class="badge bg-danger">{{ unseen_message_count }} <i class="fa-solid fa-envelope"></i></span>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endfor %}
+            {% if chat_last_unread_message and chat.pk in chat_last_unread_message %}
+              {% for key, unread_message in chat_last_unread_message.items %}
+                {% if chat.pk == key %}
+                  <div class="mt-2 truncate">
+                    <i class="fa-regular fa-message"></i><span>&nbsp;{{ unread_message.content|truncatechars:50 }}</span>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <div class="mt-2 truncate">
+                <i class="fa-regular fa-message"></i><span>&nbsp;...</span>
+              </div>
+            {% endif %}
+          </a>
+        {% empty %}
+          <div class="list-group-item">No chats available</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+  @media (max-width: 576px) {
+    .truncate {
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (min-width: 577px) {
+    .truncate {
+      max-width: 500px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+.message-window {
+    max-height: 300px; /* Set the desired height for the message window */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+.message-window::-webkit-scrollbar {
+    width: 5px; /* Set the width of the scrollbar */
+}
+
+.message-window::-webkit-scrollbar-track {
+    background-color: #ff00ff; /* Set the background color of the scrollbar track */
+}
+
+.message-window::-webkit-scrollbar-thumb {
+    background-color: #00FFFF; /* Set the color of the scrollbar thumb */
+}
+.message-container {
+    margin-bottom: 10px;
+    max-width: 50%;
+    word-wrap: break-word;
+}
+
+.my-message {
+    text-align: right;
+    margin-left: auto;
+}
+
+.other-message {
+    text-align: left;
+    margin-right: auto;
+}
+
+.message-sent,
+.message-received {
+    margin-bottom: 5px;
+}
+
+.message-username {
+    font-weight: bold;
+}
+
+.message-checkmark {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+textarea.form-control {
+    resize: none;
+}
+/* Customize the textarea scrollbar */
+textarea.form-control::-webkit-scrollbar {
+    width: 3px; /* Set the width of the scrollbar */
+}
+
+/* Track */
+textarea.form-control::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0); /* Set the background color of the scrollbar track */
+}
+
+/* Handle */
+textarea.form-control::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 255, 1); /* Set the color of the scrollbar thumb */
+}
+
+/* Handle on hover */
+textarea.form-control::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 255, 1); /* Set the color of the scrollbar thumb on hover */
+}
+
+.border-pink {
+    border: 1px solid #FF00FF;
+}

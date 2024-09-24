@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}<title>Обьявление {{ post.title }}</title>{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+{% if post.photo %}
+    <img src="{{ post.photo.url }}" alt="{{ post.title }} photo">
+{% endif %}
+<p>{{ post.description }}</p>
+<p>Price: {{ post.price }}</p>
+<p>Views: {{ post.views }}</p>
+<br><br><br>
+{% if request.user != post.created_by %}
+    <a href="{% url 'open_chat' user_id=post.created_by.id %}">Open Chat with {{ post.created_by }}</a>
+{% endif %}
+<br><br><br>
+    {% if post.created_by == request.user %}
+        <a href="{% url 'edit_post' post.id %}">Edit</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}<title>MY_POSTS</title>{% endblock %}
+
+{% block content %}
+<h1>MY POSTS</h1>
+<a href="{% url 'create_post' %}">Создать обьявление</a>
+{% if posts %}
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post_detail' post.id %}"><h3>{{ post.title }}</h3></a>
+          {% if post.photo %}
+            <img src="{{ post.photo.url }}" alt="{{ post.title }} photo">
+          {% endif %}
+        <p>{{ post.description }}</p>
+        <p>Price: {{ post.price }}</p>
+        {% if post.created_by == request.user %}
+          <a href="{% url 'edit_post' post.id %}">Edit post</a>
+        {% endif %}
+        <!-- Display other post fields as needed -->
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No posts found.</p>
+{% endif %}
+{% endblock %}
